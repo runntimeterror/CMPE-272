@@ -1,0 +1,25 @@
+-
+  name: Deploy nginx and start webServers
+  hosts: webServers
+  become: true
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+    - name: Install Nginx
+      yum: 
+        name: nginx
+        state: present
+    - name: Swap default index page
+      template:
+        src: app/www/index.html
+        dest: /usr/share/nginx/html/index.html
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+    - name: open TCP connections to port 80
+      command: firewall-cmd --zone=public --add-port=80/tcp --permanent
+    - name: Restart firewall
+      command: firewall-cmd --reload 
