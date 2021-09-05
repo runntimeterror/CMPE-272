@@ -1,20 +1,37 @@
 -
-  name: Deploy nginx and start webServers
-  hosts: webServers
+  name: Deploy nginx
   become: true
+  hosts: all
   tasks:
     - name: Add epel-release repo
       yum:
         name: epel-release
         state: present
-    - name: Install Nginx
-      yum: 
+    - name: Install nginx
+      yum:
         name: nginx
         state: present
-    - name: Swap default index page
-      template:
+- hosts: webServers
+  become: true
+  tasks:
+    - name: Replace default HTML from webServers
+      template: 
         src: app/www/index.html
         dest: /usr/share/nginx/html/index.html
+    - name: Ser IP headers from webServers
+      template:
+        src: app/nginx/webServers.conf
+        dest: /etc/nginx/conf.d/webServers.conf
+- hosts: loadBalancer
+  become: true
+  tasks:  
+    - name: Configure the load balancer
+      template:
+        src: app/nginx/nginx.conf
+        dest: /etc/nginx/nginx.conf
+- hosts: all
+  become: true
+  tasks:
     - name: Start nginx
       service:
         name: nginx
@@ -22,4 +39,5 @@
     - name: open TCP connections to port 80
       command: firewall-cmd --zone=public --add-port=80/tcp --permanent
     - name: Restart firewall
-      command: firewall-cmd --reload 
+      command: firewall-cmd --reload
+
