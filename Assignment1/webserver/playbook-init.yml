@@ -18,10 +18,6 @@
       template: 
         src: app/www/index.html
         dest: /usr/share/nginx/html/index.html
-    - name: Ser IP headers from webServers
-      template:
-        src: app/nginx/webServers.conf
-        dest: /etc/nginx/conf.d/webServers.conf
 - hosts: loadBalancer
   become: true
   tasks:  
