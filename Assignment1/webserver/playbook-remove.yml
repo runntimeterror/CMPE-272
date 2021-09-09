@@ -1,0 +1,19 @@
+-  
+  name: stop webserver
+  hosts: all
+  become: true
+  tasks:
+    - name: stop nginx
+      service: 
+          name: nginx
+          state: stopped
+          
+- 
+    name: Undeploy
+    hosts: all
+    become: true
+    tasks:
+      - name: uninstall nginx
+        yum: 
+          name: nginx
+          state: absent
