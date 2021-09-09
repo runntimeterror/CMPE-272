@@ -1,6 +1,6 @@
 -  
   name: stop webserver
-  hosts: webServers
+  hosts: all
   become: true
   tasks:
     - name: stop nginx
