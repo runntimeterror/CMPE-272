@@ -1,0 +1,35 @@
+.twitter-user {
+    display: flex;
+}
+.user-icon > img {
+    border-radius: 50%;
+}
+
+.tweet-container {
+    padding-bottom: 15px;
+    border-bottom: grey solid 0.1px;
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.name {
+    font-weight: bold;
+}
+.twitter-handle, .created-at {
+    color: grey;
+    font-size: medium;
+}
+
+.created-at, .tweet-text-posted {
+    margin: 15px;
+}
