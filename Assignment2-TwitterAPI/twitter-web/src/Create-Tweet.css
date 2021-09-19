@@ -3,4 +3,39 @@
     border-top: solid rgba(128, 128, 128, 0.83) .1px;
     width: 100%;
     height: 200px;
+    display: flex;
+}
+
+.user-icon {
+    background: rgba(214, 214, 214, 0.63);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 15px;
+}
+
+.tweet-text {
+    width: 100%;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tweet-button {
+    color: white;
+    background-color: rgb(29, 155, 240);
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+    font-size: large;
+    font-weight: bolder;
+    height: 35px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    align-self: flex-end;
 }
