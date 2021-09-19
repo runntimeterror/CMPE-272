@@ -1,5 +1,5 @@
 function TweetList() {
-    return "Tweet List"
+    return <div>Tweet List</div>
 }
 
 export default TweetList
