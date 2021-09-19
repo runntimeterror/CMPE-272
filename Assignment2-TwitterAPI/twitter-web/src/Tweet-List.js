@@ -8,7 +8,7 @@ function TweetList() {
 
     const service_url = `http://localhost:8080/tweet`
 
-    useEffect(() => {
+    const refreshList = () => {
         fetch(service_url)
             .then(res => res.json())
             .then(
@@ -21,11 +21,17 @@ function TweetList() {
                     setError(error);
                 }
             )
+    }
+
+    useEffect(() => {
+        refreshList()
     }, [])
 
     const deleteTweet = (tweetId) => {
         fetch(`${service_url}/${tweetId}`, {
             method: `DELETE`
+        }).then(() => {
+            refreshList()
         })
     }
 

@@ -7,7 +7,7 @@ function Tweet(props) {
         text,
         created_at,
         deleteTweet,
-        id
+        id_str
     } = props
     return <div className="tweet-container">
         <div className="twitter-user">
@@ -22,7 +22,7 @@ function Tweet(props) {
         <div className="tweet-text-posted">{text}</div>
         <div className="meta-info">
             <div className="created-at">Created: {created_at}</div>
-            <i onClick={() => deleteTweet(id)} class="delete-tweet"><img src="/trash-alt-regular.svg" width="20"></img></i>
+            <i onClick={() => deleteTweet(id_str)} class="delete-tweet"><img src="/trash-alt-regular.svg" width="20"></img></i>
         </div>
     </div>
 }
