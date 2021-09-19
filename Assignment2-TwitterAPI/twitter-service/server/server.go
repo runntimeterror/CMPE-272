@@ -153,8 +153,9 @@ func Init() *Server {
 func (s *Server) Run(port string) {
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})
 	origins := handlers.AllowedOrigins([]string{"*"})
+	headersOK := handlers.AllowedHeaders([]string{"Content-Type"})
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.CORS(methods, origins)(s.router)))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.CORS(headersOK, methods, origins)(s.router)))
 }
 
 func (s *Server) getTweet(w http.ResponseWriter, r *http.Request) {
