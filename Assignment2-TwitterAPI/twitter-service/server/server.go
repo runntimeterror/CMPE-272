@@ -12,6 +12,7 @@ import (
 
 	"github.com/dghubble/oauth1"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/handlers"
 )
 
 type Server struct {
@@ -150,7 +151,10 @@ func Init() *Server {
 }
 
 func (s *Server) Run(port string) {
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), s.router))
+	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})
+	origins := handlers.AllowedOrigins([]string{"*"})
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.CORS(methods, origins)(s.router)))
 }
 
 func (s *Server) getTweet(w http.ResponseWriter, r *http.Request) {
