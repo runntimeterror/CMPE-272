@@ -6,7 +6,7 @@ function CreateTweet() {
             <img height="50" width="50" src="/user-icon.png"></img>
         </div>
         <div className="tweet-text">
-            <div contentEditable="true">What's happening?</div>
+            <div className="textarea" contentEditable="true">What's happening?</div>
             <div className="tweet-button">Tweet</div>
         </div>
     </div>

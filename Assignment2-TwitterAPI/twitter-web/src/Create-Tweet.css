@@ -21,6 +21,9 @@
     flex-direction: column;
     justify-content: space-between;
 }
+.textarea {
+    height: 100px;
+}
 
 .tweet-button {
     color: white;
