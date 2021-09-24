@@ -1,3 +1,6 @@
+/**
+ * File created by Rajat Banerjee
+ */
 import Tweet from './Tweet'
 
 function TweetList(props) {

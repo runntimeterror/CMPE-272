@@ -1,3 +1,6 @@
+/**
+ * File created by Soham Bhattacharjee
+ */
 import './Tweet.css'
 
 function Tweet(props) {
