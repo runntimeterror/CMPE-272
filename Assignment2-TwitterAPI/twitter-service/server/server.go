@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/dghubble/oauth1"
-	"github.com/gorilla/mux"
 	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 )
 
 type Server struct {
@@ -181,12 +181,20 @@ func (s *Server) getAllTweets(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := s.client.Get(url.String())
 	if err != nil {
+		w.Header().Add("content-type", "application/json")
 		w.WriteHeader(500)
 		w.Write([]byte(err.Error()))
 	}
 
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
+
+	if resp != nil && resp.StatusCode != http.StatusOK {
+		w.Header().Add("content-type", "application/json")
+		w.WriteHeader(resp.StatusCode)
+		w.Write(body)
+	}
+
 	w.Header().Add("content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(body)
@@ -204,17 +212,23 @@ func (s *Server) createTweet(w http.ResponseWriter, r *http.Request) {
 		RawQuery: fmt.Sprintf("status=%v", url.QueryEscape(data["status"])),
 	}
 
-	res, err := s.client.Post(url.String(), "application/json", strings.NewReader(``))
+	resp, err := s.client.Post(url.String(), "application/json", strings.NewReader(``))
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	defer res.Body.Close()
+	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println(err)
 		return
+	}
+
+	if resp != nil && resp.StatusCode != http.StatusOK {
+		w.Header().Add("content-type", "application/json")
+		w.WriteHeader(resp.StatusCode)
+		w.Write(body)
 	}
 
 	w.Header().Add("content-type", "application/json")
