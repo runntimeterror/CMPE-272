@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Written by Soham Bhattacharjee <soham.bhattacharjee.sjsu.edu -->
+<html>
+
+<head>
+    <title>Response from Lambda</title>
+    <style>
+        body{background-color:#d3eafc}.joke-img{display:flex;flex-direction:column;align-items:center;position:relative;background-size:cover;height:80vh}.joke-img::before{content:"";background-image:url('https://miro.medium.com/max/1400/1*MVBrnVwEYOHAOGCXugiKPg.png');background-repeat:no-repeat;background-position:center center;background-size:cover;position:absolute;top:0;right:0;bottom:0;left:0;opacity:.15}.joke-card{display:flex;justify-content:space-around;align-items:center;text-align:center;font-size:34px;width:600px;padding:15px}.page-wrapper{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh}#div-joke{position:absolute}.button-reload{margin:0 auto;cursor:pointer;border-radius:10px;animation:bouncy 5s infinite linear;position:relative;width:200px;height:55px;font-size:large;text-transform:uppercase;display:inline-block;padding:.35em 1.2em;border:.1em solid #fff;margin:0 .3em .3em 0;box-sizing:border-box;text-decoration:none;font-family:Roboto,sans-serif;font-weight:300;color:#fff;text-align:center;background-color:#000;transition:all .2s}.button-reload:hover{background-color:#9ad3ff;color:#000}@keyframes bouncy{0%{top:0}40%{top:0}43%{top:-.9em}46%{top:0}48%{top:-.4em}50%{top:0}100%{top:0}}.cta{display:flex;flex-direction:column;align-items:center}.legend{display:flex;flex-direction:column;align-items:center;margin-top:15px;z-index:1}
+    </style>
+</head>
+
+<body>
+    <script>
+        function fetchJoke() {
+            fetch('https://icanhazdadjoke.com/', {
+                headers: {
+                    'Accept': 'application/json',
+                },
+            })
+                .then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    document.getElementById("div-joke").innerText = data.joke
+                });
+        }
+        // self executing function here
+        (function () {
+            fetchJoke()
+        })();
+    </script>
+    <div class=joke-img>
+        <div class="page-wrapper">
+            <div id="div-joke" class="joke-card">
+                You know that cemetery up the road? People are dying to get in there.
+            </div>
+        </div>
+        <div class="cta">
+            <button onclick="javascript:fetchJoke()" class="button-reload">Another One</button>
+            <div class="legend">
+                CMPE-272 - Homework #4
+                <a href="mailto:soham.bhattacharjee@sjsu.edu">Soham Bhattacharjee</a>
+                <a href="mailto:rajat.banerjee@sjsu.edu">Rajat Banerjee</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
